@@ -1,0 +1,20 @@
+[project]
+name = "network-automation-interview-lab"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Paolo Solari",email = "paolosolari1998@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+]
+
+[tool.poetry]
+packages = [
+    { include = "network_automation_lab", from = "src" }
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

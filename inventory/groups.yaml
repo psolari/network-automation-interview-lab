@@ -1,0 +1,21 @@
+cisco_iosxe:
+  platform: iosxe
+  data:
+    vendor: cisco
+    netconf_port: 830
+    restconf_port: 443
+
+arista_eos:
+  platform: eos
+  data:
+    vendor: arista
+
+london:
+  data:
+    region: uk
+    site_code: LON
+
+manchester:
+  data:
+    region: uk
+    site_code: MAN

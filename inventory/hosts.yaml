@@ -1,0 +1,68 @@
+lon-rtr-01:
+  hostname: 192.0.2.11
+  platform: iosxe
+  groups:
+    - cisco_iosxe
+    - london
+  data:
+    role: router
+    site: london
+    model: C8000v
+    asn: 65001
+
+lon-sw-01:
+  hostname: 192.0.2.21
+  platform: iosxe
+  groups:
+    - cisco_iosxe
+    - london
+  data:
+    role: switch
+    site: london
+    model: C9300
+
+lon-sw-02:
+  hostname: 192.0.2.22
+  platform: eos
+  groups:
+    - arista_eos
+    - london
+  data:
+    role: switch
+    site: london
+    model: vEOS
+
+man-rtr-01:
+  hostname: 192.0.2.31
+  platform: iosxe
+  groups:
+    - cisco_iosxe
+    - manchester
+  data:
+    role: router
+    site: manchester
+    model: C8000V
+    asn: 65002
+
+man-sw-01:
+  hostname: 192.0.2.41
+  platform: iosxe
+  groups:
+    - cisco_iosxe
+    - manchester
+  data:
+    role: switch
+    site: manchester
+    model: C9300
+
+man-sw-02:
+  hostname: 192.0.2.42
+  platform: eos
+  groups:
+    - arista_eos
+    - manchester
+  data:
+    role: switch
+    site: manchester
+    model: vEOS
+
