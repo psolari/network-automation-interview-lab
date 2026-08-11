@@ -1,0 +1,14 @@
+{% for interface_name, interface in interfaces.items() %}
+interface {{ interface_name }}
+ description {{ interface.description }}
+{% if interface.mode is defined and interface.mode == "access" %}
+ switchport mode {{ interface.mode }}
+ switchport access vlan {{ interface.vlan }}
+{% endif %}
+{% if interface.enabled %}
+ no shutdown
+{% else %}
+ shutdown
+{% endif %}
+!
+{% endfor %}

@@ -1,0 +1,7 @@
+router bgp {{ device.asn }}
+ bgp router-id {{ device.bgp.router_id }}
+{% for neighbour in device.bgp.neighbours %}
+ neighbor {{ neighbour.address }} remote-as {{ neighbour.remote_as }}
+ neighbor {{ neighbour.address }} description {{ neighbour.description }}
+{% endfor %}
+!

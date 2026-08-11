@@ -28,7 +28,7 @@ devices:
     interfaces:
       GigabitEthernet1:
         description: LAN uplink
-        ipv4: 10.1.0.1999/30
+        ipv4: 10.1.0.1/30
         enabled: true
 
       GigabitEthernet2:

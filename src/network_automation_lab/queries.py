@@ -1,6 +1,9 @@
 def get_device(data: dict, hostname: str) -> dict:
-    device = data["devices"][hostname]
-    return device
+    return data["devices"][hostname]
+
+
+def get_platform(inventory: dict, hostname: str) -> str:
+    return inventory[hostname]["platform"]
 
 
 def get_devices_by_role(data: dict, role: str) -> dict:
