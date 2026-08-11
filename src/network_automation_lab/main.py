@@ -1,22 +1,21 @@
-from network_automation_lab.generator import (
-    generate_all_config,
-)
+import time
+
 from network_automation_lab.intent import load_intent
-from network_automation_lab.inventory import load_inventory
-from network_automation_lab.output import write_configs
-from network_automation_lab.queries import get_devices_by_role
+from network_automation_lab.nornir_setup import initialise_nornir
+from network_automation_lab.tasks import generate_config_task
 
 
 def main() -> None:
 
     data = load_intent("intent/network.yaml")
-    result = get_devices_by_role(data, "router")
-    print(result)
+    nr = initialise_nornir()
 
-    # inventory = load_inventory("inventory/hosts.yaml")
+    results = nr.run(
+        task=generate_config_task,
+        intent=data,
+    )
 
-    # configs = generate_all_config(data=data, inventory=inventory)
-    # write_configs(configs, "generated")
+    print(results)
 
 
 if __name__ == "__main__":

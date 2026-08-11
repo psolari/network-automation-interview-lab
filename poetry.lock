@@ -143,6 +143,21 @@ files = [
 ]
 
 [[package]]
+name = "nornir"
+version = "3.6.0"
+description = "Pluggable multi-threaded framework with inventory management to help operate collections of devices"
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "nornir-3.6.0-py3-none-any.whl", hash = "sha256:887da5e476cc00a36704aab98abfbe86e6bfedb0769c96ff786cf7b94a86ca4a"},
+    {file = "nornir-3.6.0.tar.gz", hash = "sha256:829e52b37cbe6c0454fc81b73b010f148f107d81e22b81db4583b570cce6f0e7"},
+]
+
+[package.dependencies]
+ruamel-yaml = ">=0.17"
+
+[[package]]
 name = "packaging"
 version = "26.3"
 description = "Core utilities for Python packages"
@@ -290,7 +305,25 @@ files = [
     {file = "pyyaml-6.0.3.tar.gz", hash = "sha256:d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f"},
 ]
 
+[[package]]
+name = "ruamel-yaml"
+version = "0.19.1"
+description = "ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "ruamel_yaml-0.19.1-py3-none-any.whl", hash = "sha256:27592957fedf6e0b62f281e96effd28043345e0e66001f97683aa9a40c667c93"},
+    {file = "ruamel_yaml-0.19.1.tar.gz", hash = "sha256:53eb66cd27849eff968ebf8f0bf61f46cdac2da1d1f3576dd4ccee9b25c31993"},
+]
+
+[package.extras]
+docs = ["mercurial (>5.7)", "ryd"]
+jinja2 = ["ruamel.yaml.jinja2 (>=0.2)"]
+libyaml = ["ruamel.yaml.clibz (>=0.3.7) ; platform_python_implementation == \"CPython\""]
+oldlibyaml = ["ruamel.yaml.clib ; platform_python_implementation == \"CPython\""]
+
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<3.14"
-content-hash = "d77d69727d2f01367e6f2735de08cdaa04b8658a4b1cb8c146e0c99c7967eb5a"
+content-hash = "6b282ac43e2c3a776132c99044f4481680b0ed5c5c227d4a0934c044f53f70dd"

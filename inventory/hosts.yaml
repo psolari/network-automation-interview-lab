@@ -9,6 +9,7 @@ lon-rtr-01:
     site: london
     model: C8000v
     asn: 65001
+    foo: bar
 
 lon-sw-01:
   hostname: 192.0.2.21
