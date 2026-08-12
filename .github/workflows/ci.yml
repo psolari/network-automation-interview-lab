@@ -93,7 +93,7 @@ jobs:
           images: ${{ steps.login-ecr.outputs.registry }}/network-automation-interview-lab
           tags: |
             type=raw,value=latest
-            type=sha,prefix=sha-
+            type=sha,format=long,prefix=sha-
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
@@ -104,3 +104,25 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      - name: Render ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: automation
+          image: ${{ steps.login-ecr.outputs.registry }}/network-automation-interview-lab:sha-${{ github.sha }}
+      - name: Deploy and run ECS task
+        id: deploy
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          cluster: network-automation-lab
+
+          run-task: true
+          run-task-launch-type: FARGATE
+          run-task-subnets: ${{ vars.ECS_SUBNETS }}
+          run-task-security-groups: ${{ vars.ECS_SECURITY_GROUPS }}
+          run-task-assign-public-IP: ENABLED
+
+          wait-for-task-stopped: true
+          wait-max-delay-seconds: 15
