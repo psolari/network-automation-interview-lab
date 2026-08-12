@@ -6,8 +6,6 @@ from nornir_napalm.plugins.tasks import (
     napalm_validate,
 )
 
-from network_automation_lab.nornir_setup import initialise_nornir
-
 
 def safe_change(nr, validation: list) -> None:
     lon_router = nr.filter(name="lon-rtr-01")

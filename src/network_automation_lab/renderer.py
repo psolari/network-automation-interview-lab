@@ -1,5 +1,5 @@
-from pathlib import Path
 from ipaddress import IPv4Interface
+from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 

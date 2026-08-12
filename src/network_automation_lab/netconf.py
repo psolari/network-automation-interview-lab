@@ -1,5 +1,3 @@
-import pprint
-
 from ncclient import manager
 
 

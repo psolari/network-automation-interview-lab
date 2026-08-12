@@ -22,8 +22,8 @@ def validate_duplicate_addresses(data: dict) -> list[str]:
     found_addresses = set()
     duplicates = []
 
-    for hostname, device in data["devices"].items():
-        for interface, details in device.get("interfaces", {}).items():
+    for device in data["devices"].values():
+        for details in device.get("interfaces", {}).values():
             if "ipv4" in details:
                 try:
                     address = IPv4Interface(details["ipv4"]).ip

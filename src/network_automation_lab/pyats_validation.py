@@ -1,6 +1,6 @@
+from genie.utils.diff import Diff
 from pyats import aetest
 from pyats.topology import loader
-from genie.utils.diff import Diff
 
 
 class CommonSetup(aetest.CommonSetup):

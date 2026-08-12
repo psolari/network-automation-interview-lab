@@ -1,12 +1,13 @@
-import pytest
 from copy import deepcopy
+
+import pytest
 from jinja2 import UndefinedError
 
 from network_automation_lab.renderer import (
     render_device_config,
     render_eos_interfaces,
-    render_iosxe_interfaces,
     render_iosxe_bgp,
+    render_iosxe_interfaces,
 )
 
 

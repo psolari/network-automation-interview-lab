@@ -1,5 +1,6 @@
-from nornir.core.task import Result, Task
 import time
+
+from nornir.core.task import Result, Task
 
 from network_automation_lab.queries import get_device
 from network_automation_lab.renderer import render_device_config

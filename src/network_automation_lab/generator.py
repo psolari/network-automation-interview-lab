@@ -13,6 +13,6 @@ def generate_device_config(data: dict, inventory: dict, hostname: str) -> str:
 
 def generate_all_config(data: dict, inventory: dict) -> dict:
     generated_configs = {}
-    for hostname, details in inventory.items():
+    for hostname in inventory:
         generated_configs[hostname] = generate_device_config(data, inventory, hostname)
     return generated_configs
