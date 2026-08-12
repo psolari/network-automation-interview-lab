@@ -1,5 +1,9 @@
 cisco_iosxe:
   platform: iosxe
+
+  connection_options:
+    napalm:
+      platform: ios
   data:
     vendor: cisco
     netconf_port: 830

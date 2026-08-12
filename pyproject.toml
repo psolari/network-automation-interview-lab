@@ -10,7 +10,11 @@ requires-python = ">=3.12,<3.14"
 dependencies = [
     "pyyaml (>=6.0.3,<7.0.0)",
     "jinja2 (>=3.1.6,<4.0.0)",
-    "nornir (>=3.6.0,<4.0.0)"
+    "nornir (>=3.6.0,<4.0.0)",
+    "nornir-napalm (>=0.6.0,<0.7.0)",
+    "pyats (>=26.7,<27.0)",
+    "genie (>=26.7,<27.0)",
+    "ncclient (>=0.7.1,<0.8.0)"
 ]
 
 [tool.poetry]

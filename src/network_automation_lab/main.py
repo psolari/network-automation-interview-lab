@@ -1,21 +1,36 @@
-import time
+from pprint import pprint
 
-from network_automation_lab.intent import load_intent
-from network_automation_lab.nornir_setup import initialise_nornir
-from network_automation_lab.tasks import generate_config_task
+from genie.utils.diff import Diff
+from pyats.topology import loader
 
 
 def main() -> None:
+    testbed = loader.load("testbed.yaml")
+    device = testbed.devices["lon-rtr-01"]
 
-    data = load_intent("intent/network.yaml")
-    nr = initialise_nornir()
+    device.connect()
 
-    results = nr.run(
-        task=generate_config_task,
-        intent=data,
-    )
+    before = device.learn("interface")
+    before_state = before.info
 
-    print(results)
+    device.configure("""
+        interface Loopback100
+        description PYATS DIFF TEST
+        ip address 10.100.100.1 255.255.255.255
+        no shutdown
+        """)
+
+    after = device.learn("interface")
+    after_state = after.info
+
+    diff = Diff(before_state, after_state, exclude=before.exclude)
+
+    diff.findDiff()
+    print(diff)
+    device.configure("""
+        no interface Loopback100
+        """)
+    device.disconnect()
 
 
 if __name__ == "__main__":

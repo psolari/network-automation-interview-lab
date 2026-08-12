@@ -1,0 +1,24 @@
+testbed:
+  name: interview-lab
+  credentials:
+    default:
+      username: '%ENV{PYATS_USERNAME}'
+      password: '%ENV{PYATS_PASSWORD}'
+
+
+devices:
+  lon-rtr-01:
+    os: iosxe
+    type: router
+    connections:
+      cli:
+        protocol: ssh
+        ip: 192.168.1.15
+
+  man-rtr-01:
+    os: iosxe
+    type: router
+    connections:
+      cli:
+        protocol: ssh
+        ip: 192.168.1.16
