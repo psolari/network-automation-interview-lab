@@ -1,0 +1,6 @@
+services:
+  automation:
+    build:
+      context: .
+    image: network-automation-lab
+    command: pytest -q
