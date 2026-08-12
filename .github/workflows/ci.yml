@@ -63,11 +63,25 @@ jobs:
 
     permissions:
       contents: read
-      packages: write
+      id-token: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::122458452061:role/NetworkAutomationGitHubECRRole
+          aws-region: eu-west-2
+          allowed-account-ids: 122458452061
+
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
@@ -76,17 +90,10 @@ jobs:
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ghcr.io/${{ github.repository }}
+          images: ${{ steps.login-ecr.outputs.registry }}/network-automation-interview-lab
           tags: |
             type=raw,value=latest
             type=sha,prefix=sha-
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v4
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
