@@ -17,7 +17,7 @@ def get_devices_by_role(data: dict, role: str) -> dict:
 
 
 def get_interface_addresses(data: dict) -> dict:
-    interface_addresses = {}
+    interface_addresses: dict[str, dict[str, str]] = {}
 
     for hostname, device in data["devices"].items():
         for interface, details in device["interfaces"].items():

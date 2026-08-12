@@ -75,7 +75,7 @@ def render_eos_config(device: dict) -> str:
     return "\n".join(config_parts)
 
 
-def render_device_config(device: dict, platform: str) -> str:
+def render_device_config(device: dict, platform: str | None) -> str:
     if platform == "iosxe":
         return render_iosxe_config(device)
     if platform == "eos":
