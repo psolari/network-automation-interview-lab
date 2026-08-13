@@ -55,6 +55,10 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write
+
     defaults:
       run:
         working-directory: terraform
@@ -65,15 +69,33 @@ jobs:
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.15.8"
 
       - name: Check Terraform formatting
         run: terraform fmt -check -recursive
 
-      - name: Initialise Terraform
+      - name: Initialise Terraform for validation
         run: terraform init -backend=false -input=false
 
       - name: Validate Terraform
         run: terraform validate
+
+      - name: Configure AWS credentials
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::122458452061:role/NetworkAutomationGitHubECRRole
+          aws-region: eu-west-2
+          allowed-account-ids: 122458452061
+
+      - name: Initialise remote Terraform backend
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: terraform init -reconfigure -input=false
+
+      - name: Terraform plan
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: terraform plan -input=false -lock-timeout=30s
 
   docker-publish:
     runs-on: ubuntu-latest
