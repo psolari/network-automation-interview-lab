@@ -15,7 +15,3 @@ resource "aws_ecr_repository" "lab" {
   name = var.repository_name
   tags = local.common_tags
 }
-
-data "aws_ecr_repository" "deployment" {
-  name = "network-automation-interview-lab"
-}
